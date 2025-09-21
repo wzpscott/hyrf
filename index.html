@@ -27,7 +27,7 @@
 </head>
 <body>
 
-<section class="hero">
+<!-- <section class="hero">
   <div class="hero-body">
     <div class="container is-max-desktop">
       <div class="columns is-centered">
@@ -35,6 +35,71 @@
           <h1 class="title is-1 publication-title">
             <span>HyRF: Hybrid Radiance Fields for Efficient and High-quality Novel View Synthesis</span>
           </h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <!-- <img src="./static/images/icon.svg" width="60" height="60"> -->
+          <h1 class="title is-2 publication-title">HyRF: Hybrid Radiance Fields for Efficient and High-quality Novel View Synthesis</h1>
+          
+          <div class="is-size-4 publication-authors">
+              <span class="author-block"><b style="color: #676666;">NeurIPS 2025</b></span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <a href="https://scholar.google.com/citations?user=3w7X6NYAAAAJ" target="_blank">Zipeng Wang</a>,</span>
+            <a href="https://www.danxurgb.net/" target="_blank">Dan Xu</a><sup>*</sup>,</span>
+                  </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">The Hong Kong University of Science and Technology (HKUST)</span>
+            <div class="eql-cntrb" style="display: block; margin-top: 0.5rem;">
+              <small><sup>*</sup>Corresponding author</small>
+          </div>
+
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+                 <!-- PDF link -->
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/num" target="_blank"
+                class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                  <i class="fas fa-file-pdf"></i>
+                </span>
+                <span>Paper</span>
+              </a>
+            </span>
+
+              <!-- ArXiv abstract Link -->
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/num" target="_blank"
+                class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                  <i class="ai ai-arxiv"></i>
+                </span>
+                <span>arXiv</span>
+              </a>
+            </span>
+
+              <!-- Github link -->
+              <span class="link-block">
+                <a href="https://github.com/Rorisis/DiGA3D" target="_blank"
+                class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                  <i class="fab fa-github"></i>
+                </span>
+                <span>Code (coming soon)</span>
+              </a>
+            </span>
+        </div>
         </div>
       </div>
     </div>
@@ -48,9 +113,6 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            <!-- Recent advancements in 3D Gaussian Splatting (3DGS) have enabled real-time, high-fidelity novel view synthesis by explicitly modeling radiance fields using 3D Gaussians. However, 3DGS faces two key limitations: (1) it relies on point clouds as an optimization prior, making it susceptible to performance degradation when initial points are sparse or inaccurate, and (2) it results in large model sizes, limiting scalability. In contrast, Neural Radiance Fields (NeRF) can robustly reconstruct scenes without relying on geometric priors and maintain compact model sizes, albeit with slower rendering speeds.
-            To address these challenges, we introduce <b>Hybrid Radiance Fields (HyRF)</b>, a novel framework that combines the strengths of explicit and implicit radiance fields. Our framework represents scenes using a set of 3D points combined with a neural field that predicts 3D Gaussian properties based on point coordinates. This approach leverages the efficiency of Gaussian rasterization while maintaining the compactness of neural fields.
-            We propose a robust initialization strategy that employs volumetric rendering to generate dense and accurate initial point clouds. Additionally, we introduce a hybrid rendering scheme to enhance the representation of distant scene components. Experiments demonstrate that our method achieves state-of-the-art visual quality across multiple datasets, reduces model size by more than <b>10</b> times compared to 3DGS, and maintains real-time rendering speeds. -->
             Recently, 3D Gaussian Splatting (3DGS) has emerged as a powerful alternative to NeRF-based approaches, enabling real-time, high-quality novel view synthesis through explicit, optimizable 3D Gaussians. 
             However, 3DGS suffers from significant memory overhead due to its reliance on per-Gaussian parameters to model view-dependent effects and anisotropic shapes. 
             While recent works propose compressing 3DGS with neural fields, these methods struggle to capture high-frequency spatial variations in Gaussian properties, leading to degraded reconstruction of fine details.
@@ -256,6 +318,20 @@
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title is-3">BibTeX</h2>
+    <pre><code class="language-bibtex">
+@article{wang2025hyrf,
+  title={HyRF: Hybrid Radiance Fields for Efficient and High-quality Novel View Synthesis},
+  author={Zipeng Wang and Dan Xu},
+  journal={NeurIPS},
+  year={2025},
+}
+    </code></pre>
   </div>
 </section>
 
