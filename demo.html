@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="HyRF: Hybrid Radiance Fields for Efficient and High-quality Novel View Synthesis.">
+  <meta name="keywords" content="HyRF">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <title>Hybrid Radiance Fields for Efficient and Accurate Novel View Synthesis</title> -->
+  <title>Hybrid Radiance Fields</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <!-- Image Comparison Slider -->
+  <!-- https://github.com/sneas/img-comparison-slider -->
+  <script defer src="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/index.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/img-comparison-slider@8/dist/styles.css" />
+
+
+  <link rel="icon" href="./static/my_images/icon-removebg.png">
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">
+            <span>HyRF: Hybrid Radiance Fields for Efficient and High-quality Novel View Synthesis</span>
+          </h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            <!-- Recent advancements in 3D Gaussian Splatting (3DGS) have enabled real-time, high-fidelity novel view synthesis by explicitly modeling radiance fields using 3D Gaussians. However, 3DGS faces two key limitations: (1) it relies on point clouds as an optimization prior, making it susceptible to performance degradation when initial points are sparse or inaccurate, and (2) it results in large model sizes, limiting scalability. In contrast, Neural Radiance Fields (NeRF) can robustly reconstruct scenes without relying on geometric priors and maintain compact model sizes, albeit with slower rendering speeds.
+            To address these challenges, we introduce <b>Hybrid Radiance Fields (HyRF)</b>, a novel framework that combines the strengths of explicit and implicit radiance fields. Our framework represents scenes using a set of 3D points combined with a neural field that predicts 3D Gaussian properties based on point coordinates. This approach leverages the efficiency of Gaussian rasterization while maintaining the compactness of neural fields.
+            We propose a robust initialization strategy that employs volumetric rendering to generate dense and accurate initial point clouds. Additionally, we introduce a hybrid rendering scheme to enhance the representation of distant scene components. Experiments demonstrate that our method achieves state-of-the-art visual quality across multiple datasets, reduces model size by more than <b>10</b> times compared to 3DGS, and maintains real-time rendering speeds. -->
+            Recently, 3D Gaussian Splatting (3DGS) has emerged as a powerful alternative to NeRF-based approaches, enabling real-time, high-quality novel view synthesis through explicit, optimizable 3D Gaussians. 
+            However, 3DGS suffers from significant memory overhead due to its reliance on per-Gaussian parameters to model view-dependent effects and anisotropic shapes. 
+            While recent works propose compressing 3DGS with neural fields, these methods struggle to capture high-frequency spatial variations in Gaussian properties, leading to degraded reconstruction of fine details.
+            We present <b>Hybrid Radiance Fields (HyRF)</b>, a novel scene representation that combines the strengths of explicit Gaussians and neural fields. HyRF decomposes the scene into (1) a compact set of explicit Gaussians storing only critical high-frequency parameters and (2) grid-based neural fields that predict remaining properties. To enhance representational capacity, we introduce a decoupled neural field architecture, separately modeling geometry (scale, opacity, rotation) and view-dependent color. 
+            Additionally, we propose a hybrid rendering scheme that composites Gaussian splatting with a neural field-predicted background, addressing limitations in distant scene representation.
+            Experiments demonstrate that HyRF achieves state-of-the-art rendering quality while reducing model size by over 20× compared to 3DGS and maintaining real-time performance.
+            <br><br>
+            <font size="4"> <b>TLDR: </b> Radiance fields with <b>SOTA</b> quality, <b>NeRF</b> size and <b>3DGS</b> speed. </font>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="is-centered has-text-centered">
+      <h2 class="title is-3" style="padding-bottom: 2rem;">Method Overview</h2>
+    </div>
+
+    <div class="is-centered has-text-centered"><img src="static/my_images/framework.png" alt="PNG mit img laden" width="100%"></div>
+    <p style="padding-top: 0.5rem; padding-bottom: 0.5rem;">
+      Framework overview.
+    Our method represents the scene using grid-based neural fields and a set of compact explicit Gaussians storing only 3D position, 3D diffuse color, isotropic scale, and opacity. We encode the point position into a high-dimensional feature using the neural field and decode it into Gaussian properties with tiny MLP. These Gaussian properties are then aggregated with the explicit Gaussians and integrated into the 3DGS rasterizer. 
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="is-centered has-text-centered">
+      <h2 class="title is-3" style="padding-bottom: 2rem;">Trajectory Comparison</h2>
+    </div>
+    <div class="columns is-centered">
+      <div class="column">
+        <div class="content">
+          <video controls muted playsinline height="100%">
+            <source src="./static/my_videos/bicycle/comparison.mp4"
+                    type="video/mp4">
+          </video>
+          <video controls muted playsinline height="100%">
+            <source src="./static/my_videos/drjohnson/comparison.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+      <div class="column">
+        <div class="columns is-centered">
+          <div class="column content">
+            <video controls muted playsinline height="100%">
+              <source src="./static/my_videos/bonsai/comparison.mp4"
+                      type="video/mp4">
+            </video>
+            <video controls muted playsinline height="100%">
+              <source src="./static/my_videos/playroom/comparison.mp4"
+                      type="video/mp4">
+            </video>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="is-centered has-text-centered">
+      <h2 class="title is-3" style="padding-bottom: 2rem;">Novel View Comparison</h2>
+    </div>
+    <div class="columns is-centered">
+      <div class="column">
+        <div class="content">
+          <div class="is-centered has-text-centered"><h2 class="title is-4">Comparison to 3DGS</h2></div>
+          <img-comparison-slider style="width: 100%;" hover="hover" >
+          <span slot="first" class="img-container">
+            <img src="static/my_images/bicycle/3dgs.png" width="100%">
+            <span class="bottom-left">3DGS (1291MB)</span>
+          </span>
+          <span slot="second" class="img-container">
+            <img src="static/my_images/bicycle/ours.png" width="100%">
+            <span class="bottom-right">Ours (82MB)</span>
+          </span>
+          </img-comparison-slider>
+          <img-comparison-slider style="width: 100%;" hover="hover" >
+          <span slot="first" class="img-container">
+            <img src="static/my_images/stump/3dgs.png" width="100%">
+            <span class="bottom-left">3DGS (1034MB)</span>
+          </span>
+          <span slot="second" class="img-container">
+            <img src="static/my_images/stump/ours.png" width="100%">
+            <span class="bottom-right">Ours (60MB)</span>
+          </span>
+          </img-comparison-slider>
+          <img-comparison-slider style="width: 100%;" hover="hover" >
+          <span slot="first" class="img-container">
+            <img src="static/my_images/flowers/3dgs.png" width="100%">
+            <span class="bottom-left">3DGS (414MB)</span>
+          </span>
+          <span slot="second" class="img-container">
+            <img src="static/my_images/flowers/ours.png" width="100%">
+            <span class="bottom-right">Ours (42MB)</span>
+          </span>
+          </img-comparison-slider>
+          <img-comparison-slider style="width: 100%;" hover="hover" >
+          <span slot="first" class="img-container">
+            <img src="static/my_images/bonsai/3dgs.png" width="100%">
+            <span class="bottom-left">3DGS (281MB)</span>
+          </span>
+          <span slot="second" class="img-container">
+            <img src="static/my_images/bonsai/ours.png" width="100%">
+            <span class="bottom-right">Ours (30MB)</span>
+          </span>
+          </img-comparison-slider>
+          <img-comparison-slider style="width: 100%;" hover="hover" >
+          <span slot="first" class="img-container">
+            <img src="static/my_images/train/3dgs.png" width="100%">
+            <span class="bottom-left">3DGS (240MB)</span>
+          </span>
+          <span slot="second" class="img-container">
+            <img src="static/my_images/train/ours.png" width="100%">
+            <span class="bottom-right">Ours (37MB)</span>
+          </span>
+          </img-comparison-slider>
+          <img-comparison-slider style="width: 100%;" hover="hover" >
+          <span slot="first" class="img-container">
+            <img src="static/my_images/playroom/3dgs.png" width="100%">
+            <span class="bottom-left">3DGS (515MB)</span>
+          </span>
+          <span slot="second" class="img-container">
+            <img src="static/my_images/playroom/ours.png" width="100%">
+            <span class="bottom-right">Ours (32MB)</span>
+          </span>
+          </img-comparison-slider>
+        </div>
+      </div>
+      <div class="column">
+        <div class="columns is-centered">
+          <div class="column content">
+            <div class="is-centered has-text-centered"><h2 class="title is-4">Comparison to ScaffoldGS</h2></div>
+            <img-comparison-slider style="width: 100%;" hover="hover" >
+            <span slot="first" class="img-container">
+              <img src="static/my_images/bicycle/scaffoldgs.png" width="100%">
+              <span class="bottom-left">ScaffoldGS (248MB)</span>
+            </span>
+            <span slot="second" class="img-container">
+              <img src="static/my_images/bicycle/ours.png" width="100%">
+              <span class="bottom-right">Ours (82MB)</span>
+            </span>
+            </img-comparison-slider>
+            <img-comparison-slider style="width: 100%;" hover="hover" >
+            <span slot="first" class="img-container">
+              <img src="static/my_images/stump/scaffoldgs.png" width="100%">
+              <span class="bottom-left">ScaffoldGS (493MB)</span>
+            </span>
+            <span slot="second" class="img-container">
+              <img src="static/my_images/stump/ours.png" width="100%">
+              <span class="bottom-right">Ours (60MB)</span>
+            </span>
+            </img-comparison-slider>
+            <img-comparison-slider style="width: 100%;" hover="hover" >
+            <span slot="first" class="img-container">
+              <img src="static/my_images/flowers/scaffoldgs.png" width="100%">
+              <span class="bottom-left">ScaffoldGS (173MB)</span>
+            </span>
+            <span slot="second" class="img-container">
+              <img src="static/my_images/flowers/ours.png" width="100%">
+              <span class="bottom-right">Ours (42MB)</span>
+            </span>
+            </img-comparison-slider>
+            <img-comparison-slider style="width: 100%;" hover="hover" >
+            <span slot="first" class="img-container">
+              <img src="static/my_images/bonsai/scaffoldgs.png" width="100%">
+              <span class="bottom-left">ScaffoldGS (258MB)</span>
+            </span>
+            <span slot="second" class="img-container">
+              <img src="static/my_images/bonsai/ours.png" width="100%">
+              <span class="bottom-right">Ours (30MB)</span>
+            </span>
+            </img-comparison-slider>
+            <img-comparison-slider style="width: 100%;" hover="hover" >
+            <span slot="first" class="img-container">
+              <img src="static/my_images/train/scaffoldgs.png" width="100%">
+              <span class="bottom-left">ScaffoldGS (66MB)</span>
+            </span>
+            <span slot="second" class="img-container">
+              <img src="static/my_images/train/ours.png" width="100%">
+              <span class="bottom-right">Ours (37MB)</span>
+            </span>
+            </img-comparison-slider>
+            <img-comparison-slider style="width: 100%;" hover="hover" >
+            <span slot="first" class="img-container">
+              <img src="static/my_images/playroom/scaffoldgs.png" width="100%">
+              <span class="bottom-left">ScaffoldGS (63MB)</span>
+            </span>
+            <span slot="second" class="img-container">
+              <img src="static/my_images/playroom/ours.png" width="100%">
+              <span class="bottom-right">Ours (32MB)</span>
+            </span>
+            </img-comparison-slider>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
